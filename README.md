@@ -96,6 +96,19 @@ Local app: [http://localhost:5173/](http://localhost:5173/)
 
 Follow [Quick Start](#24-quick-start). Backend setup is in [section 11](#11-backend-development) and the frontend in [section 12](#12-frontend-development).
 
+## Public link for LinkedIn
+
+LinkedIn shares a URL. It does not host this app. Publish the site, then paste that URL into the LinkedIn post.
+
+| What you want to show | Where to deploy | File in this repo |
+|---|---|---|
+| Homepage, slides, and spoken explanation | [Vercel](https://vercel.com) | [frontend/vercel.json](frontend/vercel.json) |
+| Sign-in, reports, GPS photos, and official desks | [Render](https://render.com) or [Railway](https://railway.app) | [render.yaml](render.yaml), [railway.toml](railway.toml) |
+
+Vercel project settings: import this GitHub repository, set the root directory to `frontend`, and use `npm run build`. The published site URL is the link for LinkedIn. The slides and audio are static files, so they play on that site.
+
+The FastAPI app stays on Render or Railway. In that service set `DATABASE_URL`, `FRONTEND_URL` to the Vercel URL, and `BACKEND_CORS_ORIGINS` to the same Vercel URL. The current frontend calls `/api` on its own host, so login and reports stay on the local app until that API address is wired into the production build.
+
 ## Contribution
 
 1. Fork the repository and create a branch from `main`.
@@ -395,15 +408,15 @@ docker-compose up --build
 
 ### Cloud Deployment Options
 
-| Platform | Cost | Difficulty |
+| Platform | What it serves | Config file |
 |---|---|---|
-| **Railway.app** | Free tier → $5/mo | ⭐ Easiest |
-| **Render.com** | Free DB (750hr) → $7/mo | ⭐ Easy |
-| **AWS EC2 + RDS** | $15–40/mo | ⭐⭐ Medium |
-| **Oracle Cloud Always Free** | $0 (ARM VM) | ⭐⭐⭐ Advanced |
-| **Vercel + Render** | $0 (frontend) + $7 (backend) | ⭐ Easy |
+| **Vercel** | React site, including the demo slides and audio | `frontend/vercel.json` |
+| **Render** | FastAPI | `render.yaml` |
+| **Railway** | FastAPI | `railway.toml` |
+| **AWS EC2 + RDS** | Full stack on a virtual machine | `docker-compose.yml` |
+| **Oracle Cloud Always Free** | Full stack on a virtual machine | `docker-compose.yml` |
 
-For MVP: **Railway.app** (one-click deploy from GitHub) or **Oracle Cloud VM** (free ARM A1, enough for CPU inference).
+Import the GitHub repository on Vercel with the root directory set to `frontend`. Use Render or Railway for the API, with `DATABASE_URL` pointed at PostgreSQL. The steps for a LinkedIn link are in [Public link for LinkedIn](#public-link-for-linkedin).
 
 ---
 

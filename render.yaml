@@ -1,0 +1,23 @@
+# API for the civic app. The homepage slides and audio are deployed separately
+# from frontend/vercel.json. Set DATABASE_URL, FRONTEND_URL, and
+# BACKEND_CORS_ORIGINS in the Render dashboard before the first deploy.
+services:
+  - type: web
+    name: nexus-ai-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: BACKEND_CORS_ORIGINS
+        sync: false
