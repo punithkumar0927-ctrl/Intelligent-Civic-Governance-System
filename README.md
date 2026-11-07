@@ -105,7 +105,7 @@ LinkedIn shares a URL. It does not host this app. Publish the site, then paste t
 | Homepage, slides, and spoken explanation | [Vercel](https://vercel.com) | [frontend/vercel.json](frontend/vercel.json) |
 | Sign-in, reports, GPS photos, and official desks | [Render](https://render.com) or [Railway](https://railway.app) | [render.yaml](render.yaml), [railway.toml](railway.toml) |
 
-Vercel project settings: import this GitHub repository, set the root directory to `frontend`, and use `npm run build`. The published site URL is the link for LinkedIn. The slides and audio are static files, so they play on that site.
+Import this GitHub repository on Vercel and redeploy. The root [vercel.json](vercel.json) builds the Vite app in `frontend/` and publishes that site. The slides and audio are static files, so they play on the Vercel URL. That URL is the link for LinkedIn.
 
 The FastAPI app stays on Render or Railway. In that service set `DATABASE_URL`, `FRONTEND_URL` to the Vercel URL, and `BACKEND_CORS_ORIGINS` to the same Vercel URL. The current frontend calls `/api` on its own host, so login and reports stay on the local app until that API address is wired into the production build.
 
