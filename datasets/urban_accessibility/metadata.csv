@@ -1,0 +1,6 @@
+image_id,source,city,latitude,longitude,accessibility_issue,severity,description,annotator,annotation_date
+ua_001,field_collection,Bengaluru,12.9716,77.5946,blocked_footpath,3,Motorbikes parked on footpath near MG Road intersection,team_alpha,2024-03-10
+ua_002,field_collection,Bengaluru,12.9352,77.6259,missing_ramp,4,No wheelchair ramp at Indiranagar 100ft Road pedestrian crossing,team_alpha,2024-03-11
+ua_003,field_collection,Bengaluru,12.9188,77.6075,uneven_pavement,2,Broken and lifted tiles on Koramangala 5th Block footpath,team_beta,2024-03-12
+ua_004,field_collection,Bengaluru,13.0110,77.5526,drain_cover_missing,4,Missing drain cover creating open hole on Jayanagar 4th Block main road,team_beta,2024-03-13
+ua_005,field_collection,Bengaluru,12.9591,77.7000,obstructed_path,3,Construction materials blocking pedestrian walkway on Whitefield Main Road,team_alpha,2024-03-14

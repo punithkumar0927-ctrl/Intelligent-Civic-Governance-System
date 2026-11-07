@@ -1,0 +1,5 @@
+﻿issue_id,road_name,landmark_type,landmark_name,risk_score,is_high_risk
+1,Brigade Road,school,St. Josephs School,0.72,yes
+2,100ft Road,hospital,Columbia Asia,0.65,yes
+3,Unknown,,0.45,no
+4,MG Road,metro_station,MG Road Metro,0.58,no

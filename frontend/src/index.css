@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-gray-900 bg-gray-50;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-nexus-600 text-white rounded-lg font-medium
+           hover:bg-nexus-700 focus:outline-none focus:ring-2 focus:ring-nexus-500
+           focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg
+           font-medium hover:bg-gray-50 focus:outline-none focus:ring-2
+           focus:ring-nexus-500 focus:ring-offset-2 transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md
+           transition-shadow duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg
+           focus:outline-none focus:ring-2 focus:ring-nexus-500 focus:border-nexus-500
+           transition-colors text-sm;
+  }
+
+  .severity-low      { @apply bg-green-100 text-green-800 border-green-300; }
+  .severity-medium   { @apply bg-yellow-100 text-yellow-800 border-yellow-300; }
+  .severity-high     { @apply bg-orange-100 text-orange-800 border-orange-300; }
+  .severity-critical { @apply bg-red-100 text-red-800 border-red-300; }
+
+  .status-pending      { @apply bg-gray-100 text-gray-700; }
+  .status-under_review { @apply bg-blue-100 text-blue-700; }
+  .status-in_progress  { @apply bg-yellow-100 text-yellow-700; }
+  .status-resolved     { @apply bg-green-100 text-green-700; }
+  .status-rejected     { @apply bg-red-100 text-red-700; }
+  .status-duplicate    { @apply bg-purple-100 text-purple-700; }
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  @apply rounded-xl;
+  z-index: 1;
+}

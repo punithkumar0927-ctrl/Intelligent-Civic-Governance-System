@@ -1,0 +1,6 @@
+﻿issue_id,before_image,after_image,label,annotator,confidence
+101,datasets/resolution_verification/before/pothole_b_001.jpg,datasets/resolution_verification/after/pothole_a_001.jpg,fixed,engineer_A,0.95
+102,datasets/resolution_verification/before/pothole_b_002.jpg,datasets/resolution_verification/after/pothole_a_002.jpg,fixed,engineer_A,0.90
+103,datasets/resolution_verification/before/drain_b_001.jpg,datasets/resolution_verification/after/drain_a_001.jpg,fixed,engineer_B,0.88
+104,datasets/resolution_verification/before/road_b_001.jpg,datasets/resolution_verification/after/road_a_001.jpg,partially_fixed,engineer_B,0.72
+105,datasets/resolution_verification/before/pothole_b_003.jpg,datasets/resolution_verification/after/pothole_a_003.jpg,not_fixed,engineer_A,0.96

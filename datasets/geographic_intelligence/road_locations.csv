@@ -1,0 +1,4 @@
+﻿location_id,road_name,ward,city,lat,lon,road_class,surface,length_m
+loc_001,MG Road,Ward 102,Bengaluru,12.9756,77.6068,arterial,asphalt,2100
+loc_002,Brigade Road,Ward 104,Bengaluru,12.9716,77.5946,secondary,asphalt,1500
+loc_003,Indiranagar 100ft Rd,Ward 74,Bengaluru,12.9784,77.6408,arterial,asphalt,1800

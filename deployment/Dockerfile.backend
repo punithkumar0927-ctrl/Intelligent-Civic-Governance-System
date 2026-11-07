@@ -1,0 +1,22 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx libglib2.0-0 libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt gunicorn
+
+COPY backend/ backend/
+COPY ai_engine/ ai_engine/
+RUN mkdir -p storage/uploads storage/thumbnails storage/processed_images storage/temporary
+
+ENV PYTHONPATH=/app:/app/backend
+
+EXPOSE 8000
+
+CMD ["gunicorn", "app.main:app", "--workers", "4", \
+     "--worker-class", "uvicorn.workers.UvicornWorker", \
+     "--bind", "0.0.0.0:8000", "--timeout", "120"]

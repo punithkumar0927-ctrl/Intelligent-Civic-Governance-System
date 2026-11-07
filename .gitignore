@@ -1,0 +1,112 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env3*/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables — NEVER commit secrets
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite3
+data/
+
+# Uploads (user-generated content — do not commit)
+uploads/
+backend/uploads/
+private_storage/
+backend/private_storage/
+storage/uploads/
+storage/processed_images/
+storage/thumbnails/
+storage/temporary/
+
+# Large image dataset files (keep structure, ignore images)
+datasets/**/images/**/*.jpg
+datasets/**/images/**/*.jpeg
+datasets/**/images/**/*.png
+datasets/**/raw/**
+datasets/**/annotations/**/*.xml
+datasets/**/osm_data/**
+datasets/**/gps_records/**
+datasets/**/before/**
+datasets/**/after/**
+datasets/**/image_pairs/**
+
+# AI Model weights (too large for git)
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.joblib
+*.h5
+*.weights
+ai_engine/models/*.pt
+ai_engine/models/*.pkl
+backend/models/
+
+# YOLO training runs
+runs/
+wandb/
+
+# Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Docker volumes
+pgdata/

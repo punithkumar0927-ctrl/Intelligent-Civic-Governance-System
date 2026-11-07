@@ -1,0 +1,5 @@
+﻿pair_id,image_a,image_b,lat_a,lon_a,lat_b,lon_b,is_duplicate,description
+dup_001,storage/uploads/pothole_001.jpg,storage/uploads/pothole_001.jpg,12.9716,77.5946,12.9718,77.5948,yes,Same pothole reported twice by different users
+dup_002,storage/uploads/garbage_001.jpg,storage/uploads/garbage_002.jpg,12.9500,77.6200,12.9501,77.6201,yes,Same garbage spot from two angles
+dup_003,storage/uploads/road_001.jpg,storage/uploads/road_002.jpg,12.9100,77.5800,12.9400,77.6100,no,Different locations
+dup_004,storage/uploads/drain_001.jpg,storage/uploads/drain_002.jpg,13.0100,77.5500,13.0102,77.5501,yes,Same drain blockage

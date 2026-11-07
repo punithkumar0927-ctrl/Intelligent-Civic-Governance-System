@@ -1,0 +1,5 @@
+﻿issue_id,lat,lon,severity,category,ward,city
+1,12.9716,77.5946,HIGH,pothole,Ward 104,Bengaluru
+2,12.9784,77.6408,MEDIUM,garbage,Ward 74,Bengaluru
+3,12.9100,77.5800,CRITICAL,drainage,Ward 62,Bengaluru
+4,12.9756,77.6068,LOW,streetlight,Ward 102,Bengaluru

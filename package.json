@@ -1,0 +1,24 @@
+{
+  "name": "nexus-ai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NEXUS AI - The Living Intelligence Map. Monorepo scripts.",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && uvicorn app.main:app --reload --port 8000",
+    "build": "cd frontend && npm run build",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "pip install -r backend/requirements.txt",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "test:frontend": "cd frontend && npm run lint",
+    "test:backend": "cd backend && pytest tests/ -v",
+    "test:all": "npm run test:frontend && npm run test:backend",
+    "docker:up": "docker-compose up --build -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title description">
+  <title id="title">Footpath blockage reference photo placeholder</title>
+  <desc id="description">Clearly labeled placeholder. Replace with a real, authorized reference photo.</desc>
+  <defs><linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101c2d"/><stop offset="1" stop-color="#263b52"/></linearGradient></defs>
+  <rect width="960" height="540" fill="url(#background)"/><path d="M0 370h960v170H0z" fill="#334155"/><path d="M0 390h960v150H0z" fill="#64748b"/>
+  <path d="M344 370v170m260-170v170" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="12 12"/>
+  <rect x="426" y="315" width="110" height="62" rx="14" fill="#f59e0b" stroke="#fde68a" stroke-width="5"/><circle cx="450" cy="385" r="13" fill="#111827"/><circle cx="512" cy="385" r="13" fill="#111827"/>
+  <rect x="36" y="34" width="292" height="48" rx="12" fill="#f97316"/><text x="58" y="66" fill="#111827" font-family="Arial,sans-serif" font-size="21" font-weight="700">PLACEHOLDER · NOT A PHOTO</text>
+  <text x="480" y="190" fill="#e2e8f0" font-family="Arial,sans-serif" font-size="36" font-weight="700" text-anchor="middle">FOOTPATH REFERENCE</text>
+  <text x="480" y="235" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="20" text-anchor="middle">Replace with an authorized image in datasets/reference_photos/</text>
+</svg>

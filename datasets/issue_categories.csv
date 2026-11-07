@@ -1,0 +1,6 @@
+category_id,category_name,description
+ROAD_DAMAGE,Road Damage,Cracks and deterioration on road surfaces
+POTHOLE,Pothole,Surface depression or pothole requiring inspection
+GARBAGE,Garbage Accumulation,Uncollected or improperly disposed waste
+WATER_LEAKAGE,Water Leakage,Visible leak or water loss from infrastructure
+FOOTPATH_BLOCKAGE,Footpath Blockage,Obstruction or damage affecting pedestrian access

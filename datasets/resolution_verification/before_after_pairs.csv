@@ -1,0 +1,6 @@
+﻿pair_id,before_image,after_image,issue_id,damage_type,repair_method,days_between,verified
+pair_001,datasets/resolution_verification/before/pothole_b_001.jpg,datasets/resolution_verification/after/pothole_a_001.jpg,101,pothole,cold_patch,12,yes
+pair_002,datasets/resolution_verification/before/pothole_b_002.jpg,datasets/resolution_verification/after/pothole_a_002.jpg,102,pothole,hot_mix_asphalt,8,yes
+pair_003,datasets/resolution_verification/before/drain_b_001.jpg,datasets/resolution_verification/after/drain_a_001.jpg,103,drainage_blockage,de-silting,5,yes
+pair_004,datasets/resolution_verification/before/road_b_001.jpg,datasets/resolution_verification/after/road_a_001.jpg,104,road_damage,patch_repair,20,yes
+pair_005,datasets/resolution_verification/before/pothole_b_003.jpg,datasets/resolution_verification/after/pothole_a_003.jpg,105,pothole,none_not_fixed,30,no

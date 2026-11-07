@@ -1,0 +1,15 @@
+# Garbage-Net YOLO dataset configuration
+# Source: https://github.com/garbage-net  (MIT licence)
+path: ../datasets/garbage_detection
+train: images/train
+val: images/val
+test: images/test
+
+nc: 6
+names:
+  0: plastic
+  1: paper
+  2: cardboard
+  3: glass
+  4: e_waste
+  5: organic_waste

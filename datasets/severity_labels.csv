@@ -1,0 +1,5 @@
+severity_id,severity_name,priority_level,recommended_action
+LOW,Low,1,Record and monitor; route for routine review
+MEDIUM,Medium,2,Review and schedule an appropriate response
+HIGH,High,3,Prioritize review and assess potential safety impact
+CRITICAL,Critical,4,Prompt human assessment; escalate through appropriate local channels

@@ -1,0 +1,13 @@
+﻿# RDD2022 YOLO dataset configuration
+path: ../datasets/road_damage
+train: images/train
+val: images/val
+test: images/test
+
+nc: 5
+names:
+  0: medium_damaged
+  1: severely_damaged
+  2: unpaved
+  3: longitudinal_transverse_crack
+  4: alligator_crack

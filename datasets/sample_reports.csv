@@ -1,0 +1,2 @@
+report_id,title,description,category,severity,status,latitude,longitude,location_name,image_path,reported_at,reported_by,ai_confidence,duplicate_flag
+DEMO-001,Pothole near market,SAMPLE DEMO DATA: Replace this illustrative record with your own report data.,pothole,high,pending,12.9716,77.5946,MG Road,reference_photos/placeholder-pothole.svg,2026-01-15T10:30:00+05:30,Sample Reporter,,false
