@@ -15,49 +15,143 @@ function formatTime(seconds: number): string {
 }
 
 const SLIDES = Array.from({ length: 15 }, (_, index) => `/demo/slides/${String(index + 1).padStart(2, '0')}.png`);
-const SLIDE_MS = 5000;
+const AUDIO = Array.from({ length: 15 }, (_, index) => `/demo/audio/${String(index + 1).padStart(2, '0')}.wav`);
 
 function Slideshow() {
   const shellRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const playingRef = useRef(false);
+  const pendingSeek = useRef<number | null>(null);
+  const [lines, setLines] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const [elapsed, setElapsed] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [durations, setDurations] = useState<number[]>(() => AUDIO.map(() => 0));
+  const [current, setCurrent] = useState(0);
+  const [needsTap, setNeedsTap] = useState(false);
 
   useEffect(() => {
-    if (!playing) return;
-    const timer = window.setInterval(() => {
-      setElapsed((value) => {
-        const next = value + 100;
-        if (next >= SLIDE_MS) {
-          setIndex((current) => (current + 1) % SLIDES.length);
-          return 0;
-        }
-        return next;
-      });
-    }, 100);
-    return () => window.clearInterval(timer);
+    playingRef.current = playing;
   }, [playing]);
 
-  const progress = ((index * SLIDE_MS + elapsed) / (SLIDES.length * SLIDE_MS)) * 100;
+  useEffect(() => {
+    fetch('/demo/audio/narration.json')
+      .then((response) => response.json())
+      .then((data: string[]) => setLines(data))
+      .catch(() => setLines([]));
+    AUDIO.forEach((src, item) => {
+      const probe = new Audio(src);
+      probe.preload = 'metadata';
+      probe.onloadedmetadata = () => {
+        setDurations((previous) => {
+          const next = [...previous];
+          next[item] = probe.duration || 0;
+          return next;
+        });
+      };
+    });
+  }, []);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    let ignore = false;
+    audio.pause();
+    audio.src = AUDIO[index];
+    audio.currentTime = 0;
+    setCurrent(0);
+    const start = () => {
+      if (ignore) return;
+      if (pendingSeek.current != null) {
+        audio.currentTime = pendingSeek.current;
+        pendingSeek.current = null;
+      }
+      if (!playingRef.current) return;
+      audio.play().then(() => setNeedsTap(false)).catch(() => {
+        setPlaying(false);
+        setNeedsTap(true);
+      });
+    };
+    audio.addEventListener('loadeddata', start);
+    audio.load();
+    return () => {
+      ignore = true;
+      audio.removeEventListener('loadeddata', start);
+    };
+  }, [index]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.muted = muted;
+    audio.volume = volume;
+    if (!playing) {
+      audio.pause();
+      return;
+    }
+    audio.play().then(() => setNeedsTap(false)).catch(() => {
+      setPlaying(false);
+      setNeedsTap(true);
+    });
+  }, [playing, muted, volume]);
+
+  const total = durations.reduce((sum, value) => sum + value, 0);
+  const before = durations.slice(0, index).reduce((sum, value) => sum + value, 0);
+  const progress = total ? ((before + current) / total) * 100 : 0;
+
+  const seek = (percent: number) => {
+    if (!total) return;
+    let remaining = (percent / 100) * total;
+    let nextIndex = 0;
+    while (nextIndex < durations.length - 1 && durations[nextIndex] && remaining > durations[nextIndex]) {
+      remaining -= durations[nextIndex];
+      nextIndex += 1;
+    }
+    if (nextIndex === index) {
+      const audio = audioRef.current;
+      if (audio) audio.currentTime = remaining;
+      return;
+    }
+    pendingSeek.current = remaining;
+    setIndex(nextIndex);
+  };
 
   return (
     <div ref={shellRef} className="overflow-hidden rounded-2xl border border-slate-700/80 bg-black shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
       <div className="relative aspect-video">
         <img src={SLIDES[index]} alt={`NEXUS AI presentation slide ${index + 1} of ${SLIDES.length}`} className="h-full w-full object-contain" />
         <p className="absolute left-3 top-3 rounded-lg bg-black/60 px-2 py-1 text-xs text-white">Slide {index + 1} / {SLIDES.length}</p>
+        {lines[index] && (
+          <p className="absolute inset-x-3 bottom-3 rounded-xl bg-black/75 px-3 py-2 text-left text-sm leading-relaxed text-white">{lines[index]}</p>
+        )}
       </div>
+      <audio
+        ref={audioRef}
+        preload="auto"
+        onTimeUpdate={(event) => setCurrent(event.currentTarget.currentTime)}
+        onEnded={() => {
+          if (index < AUDIO.length - 1) setIndex((value) => value + 1);
+          else setPlaying(false);
+        }}
+      />
       <div className="flex flex-wrap items-center gap-3 bg-[#0c1322] px-3 py-3 text-slate-200 sm:px-4">
         <button type="button" onClick={() => setPlaying((value) => !value)} aria-label={playing ? 'Pause' : 'Play'} className="rounded-lg p-2 hover:bg-white/10">{playing ? <Pause size={18} /> : <Play size={18} />}</button>
         <label className="flex min-w-[140px] flex-1 items-center gap-2 text-xs">
           <span className="sr-only">Progress</span>
-          <input type="range" min={0} max={100} step={0.1} value={progress} onChange={(event) => {
-            const total = (Number(event.target.value) / 100) * SLIDES.length * SLIDE_MS;
-            setIndex(Math.min(SLIDES.length - 1, Math.floor(total / SLIDE_MS)));
-            setElapsed(total % SLIDE_MS);
-          }} className="w-full accent-cyan-300" />
-          <span className="w-16 shrink-0 tabular-nums text-slate-400">{index + 1} / {SLIDES.length}</span>
+          <input type="range" min={0} max={100} step={0.1} value={progress} onChange={(event) => seek(Number(event.target.value))} className="w-full accent-cyan-300" />
+          <span className="w-24 shrink-0 tabular-nums text-slate-400">{formatTime(before + current)} / {formatTime(total)}</span>
         </label>
-        <button type="button" aria-label="Replay" onClick={() => { setIndex(0); setElapsed(0); setPlaying(true); }} className="rounded-lg p-2 hover:bg-white/10"><RotateCcw size={18} /></button>
+        <button type="button" aria-label={muted ? 'Unmute' : 'Mute'} onClick={() => setMuted((value) => !value)} className="rounded-lg p-2 hover:bg-white/10">{muted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>
+        <label className="flex items-center">
+          <span className="sr-only">Volume</span>
+          <input type="range" min={0} max={1} step={0.05} value={muted ? 0 : volume} onChange={(event) => {
+            const next = Number(event.target.value);
+            setVolume(next);
+            setMuted(next === 0);
+          }} className="w-20 accent-cyan-300" />
+        </label>
+        <button type="button" aria-label="Replay" onClick={() => { setIndex(0); setPlaying(true); }} className="rounded-lg p-2 hover:bg-white/10"><RotateCcw size={18} /></button>
         <button type="button" aria-label="Full screen" onClick={() => {
           const shell = shellRef.current;
           if (!shell) return;
@@ -65,7 +159,7 @@ function Slideshow() {
           else void shell.requestFullscreen();
         }} className="rounded-lg p-2 hover:bg-white/10"><Maximize size={18} /></button>
       </div>
-      <p className="bg-[#0c1322] px-4 pb-3 text-xs text-slate-400">Playing the uploaded NEXUS AI presentation. An admin MP4 replaces this when one is stored.</p>
+      <p className="bg-[#0c1322] px-4 pb-3 text-xs text-slate-400">{needsTap ? 'Press play to hear the spoken explanation.' : 'Spoken explanation of the uploaded NEXUS AI presentation. An admin MP4 replaces these slides when one is stored.'}</p>
     </div>
   );
 }
